@@ -11,7 +11,7 @@ public class Desktop extends JFrame{
 		setLocation(50,100);
 		setSize(600,450);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//icones.setLayout(new GridLayout(2,1,1,1));
+		icones.setLayout(new GridLayout(2,1,1,1));
 		for(Modulo m: modulos){
 			icones.add(m);
 		}
