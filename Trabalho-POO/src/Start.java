@@ -3,13 +3,14 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 public class Start {
 	public Start() {
-		Modulo produtos = new Modulo("Produtos");
-		Modulo fornecedores = new Modulo("Fornecedores");
-		Modulo clientes = new Modulo("clientes");
-		Modulo notaFiscalEntrada = new Modulo("notaFiscalEntrada");
-		Modulo notaFiscalSaida = new Modulo("notaFiscalSaida");
-		Modulo funcionarios = new Modulo("Funcionarios");
-		Modulo minhaEmpresa = new Modulo("MinhaEmpresa");
+		Modulo produtos = new Modulo("produtos","Produtos: Controle de estoque e cadastro de produtos.");
+		Modulo fornecedores = new Modulo("fornecedores","Fornecedores: Gerência de fornecedores.");
+		Modulo clientes = new Modulo("clientes","Clientes: Controle de cadastro de clientes.");
+		Modulo notaFiscalEntrada = new Modulo("notaFiscalEntrada","Notas Fiscais de Entrada");
+		Modulo notaFiscalSaida = new Modulo("notaFiscalSaida","Notas Fiscais de Saída");
+		Modulo funcionarios = new Modulo("funcionarios","Funcionários: Controle de cadastro de funcionários.");
+		Modulo minhaEmpresa = new Modulo("minhaEmpresa","Minha Empresa: Informações sobre a empresa.");
+		Modulo relatorios = new Modulo("relatorios","Relatórios");
 		
 		ArrayList<Modulo> modulos = new ArrayList<Modulo>();
 		modulos.add(produtos);
@@ -19,6 +20,7 @@ public class Start {
 		modulos.add(notaFiscalSaida);
 		modulos.add(minhaEmpresa);
 		modulos.add(funcionarios);
+		modulos.add(relatorios);
 		Desktop desktop = new Desktop(modulos);
 		desktop.setVisible(true);
 		desktop.setExtendedState(JFrame.MAXIMIZED_BOTH);
