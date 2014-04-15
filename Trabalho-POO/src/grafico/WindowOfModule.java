@@ -9,18 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
- public class WindowsAux extends JFrame{
+ public class WindowOfModule extends JFrame{
 	 public JPanel	total, //painel que contem todos os elementos
 	 				buttonPanel, //painel com botoes
 	 				gridButtonPanel, //painel interno de buttonPanel que vai ter GridLayout
 	 				allPanels; //contem todas as partes do modulo, cadastro, listagem, etc
 	 
-	 public  WindowsAux(String title, JPanel [] panels, JButton [] bPanels){
+	 public  WindowOfModule(String title, JPanel [] panels, JButton [] bPanels){
 		 
 		setTitle(title);
 		setLocation(50,100);
-		setSize(600,450);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(700,550);
 		
 		total = new JPanel();
 		total.setLayout(new BorderLayout());
@@ -53,26 +52,6 @@ import java.awt.event.ActionListener;
 		getContentPane().add(total);
 	}
 	
- 	public static void main(String arg[]) {
- 		JButton b1 = new JButton("Listar");
- 		JButton b2 = new JButton("Cadastrar");
- 		
- 		JButton [] b = { b1, b2};
- 		
- 		JLabel l1 = new JLabel("listar");
- 		JLabel l2 = new JLabel("Cadastrar");
- 		
- 		JPanel j1 = new JPanel();
- 		j1.add(l1);
- 		JPanel j2 = new JPanel();
- 		j2.add(l2);
- 		
- 		JPanel [] j = { j1, j2};
- 		
- 		new  WindowsAux("Teste",j,b).setVisible(true);
- 		
-	}
- 	
  	private class ButtonHandler implements ActionListener{
  		int panelNumber;
  		ButtonHandler(int panelNumber){

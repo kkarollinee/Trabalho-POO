@@ -22,6 +22,7 @@ public class Start {
 		modulos.add(minhaEmpresa);
 		modulos.add(funcionarios);
 		modulos.add(relatorios);
+		
 		Desktop desktop = new Desktop(modulos);
 		desktop.setVisible(true);
 		desktop.setExtendedState(JFrame.MAXIMIZED_BOTH);
