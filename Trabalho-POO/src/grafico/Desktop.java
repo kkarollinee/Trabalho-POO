@@ -1,5 +1,6 @@
 package grafico;
 import javax.swing.*;
+
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,6 +11,10 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Desktop extends JFrame{
