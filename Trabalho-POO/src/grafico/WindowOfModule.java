@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 		 
 		setTitle(title);
 		setLocation(50,100);
-		setSize(700,550);
+		setSize(800,600);
 		
 		total = new JPanel();
 		total.setLayout(new BorderLayout());

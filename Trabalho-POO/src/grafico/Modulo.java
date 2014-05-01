@@ -11,6 +11,8 @@ import javax.swing.*;
 import javax.swing.plaf.IconUIResource;
 import javax.swing.text.IconView;
 
+import sistema.Produto;
+
 public class Modulo extends JPanel implements MouseListener, WindowListener{
 	JLabel icone = new JLabel("");
 	ImageIcon imgNormal;
@@ -40,22 +42,64 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 		switch(ImgUrl){
 			case "produtos":
 				if(window == null){
-					JButton b1 = new JButton("Listar");
-			 		JButton b2 = new JButton("Cadastrar");
-			 		
-			 		JButton [] b = { b1, b2};
-			 		
-			 		JLabel l1 = new JLabel("listar");
-			 		JLabel l2 = new JLabel("ESTE TEXTO DEVE SAIR");
-			 		
-			 		JPanel j1 = new JPanel();
-			 		j1.add(l1);
-			 		JPanel j2 = new JPanel();
-			 		j2.add(l2);
-			 		
-			 		JPanel [] j = { j1, j2 };
-			 		
-			 		window = new WindowOfModule("Teste",j,b);
+					window = new WindowOfModule("Teste",Produto.getPanels(),Produto.getButtons());
+			 		window.addWindowListener(this);
+				}
+				
+				window.setVisible(true);
+				break;
+			case "fornecedores":
+				if(window == null){
+					window = new WindowOfModule("Teste",null,null);
+			 		window.addWindowListener(this);
+				}
+				
+				window.setVisible(true);
+				break;
+			case "clientes":
+				if(window == null){
+					window = new WindowOfModule("Teste",null,null);
+			 		window.addWindowListener(this);
+				}
+				
+				window.setVisible(true);
+				break;
+			case "notas fiscais de entrada":
+				if(window == null){
+					window = new WindowOfModule("Teste",null,null);
+			 		window.addWindowListener(this);
+				}
+				
+				window.setVisible(true);
+				break;
+			case "notas fiscais de saida":
+				if(window == null){
+					window = new WindowOfModule("Teste",null,null);
+			 		window.addWindowListener(this);
+				}
+				
+				window.setVisible(true);
+				break;
+					
+			case "minha empresa":
+				if(window == null){
+					window = new WindowOfModule("Teste",null,null);
+			 		window.addWindowListener(this);
+				}
+				
+				window.setVisible(true);
+				break;
+			case "funcionario":
+				if(window == null){
+					window = new WindowOfModule("Teste",null,null);
+			 		window.addWindowListener(this);
+				}
+				
+				window.setVisible(true);
+				break;
+			case "relatorios":
+				if(window == null){
+					window = new WindowOfModule("Teste",null,null);
 			 		window.addWindowListener(this);
 				}
 				

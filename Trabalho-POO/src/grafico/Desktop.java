@@ -1,6 +1,8 @@
 package grafico;
 import javax.swing.*;
 
+import banco.BD;
+
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,7 +20,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Desktop extends JFrame{
-	// add gridLayout
+	public static BD banco = new BD();
+	
 	JPanel icones = new JPanel(){
 		@Override
 		protected void paintComponent(Graphics g) {
