@@ -11,7 +11,7 @@ import javax.swing.*;
 import javax.swing.plaf.IconUIResource;
 import javax.swing.text.IconView;
 
-import sistema.Produto;
+import sistema.*;
 
 public class Modulo extends JPanel implements MouseListener, WindowListener{
 	JLabel icone = new JLabel("");
@@ -50,7 +50,7 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 				break;
 			case "fornecedores":
 				if(window == null){
-					window = new WindowOfModule("Teste",null,null);
+					window = new WindowOfModule("Teste",Fornecedor.getPanels(),Fornecedor.getButtons());
 			 		window.addWindowListener(this);
 				}
 				

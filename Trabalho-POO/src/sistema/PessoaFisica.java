@@ -1,4 +1,5 @@
 package sistema;
+import banco.BD;
 import java.util.*;
 public abstract class PessoaFisica {
 	public int pessoa_id;

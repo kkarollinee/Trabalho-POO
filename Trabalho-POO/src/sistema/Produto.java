@@ -1,4 +1,5 @@
 package sistema;
+import banco.BD;
 import grafico.Desktop;
 
 import java.awt.GridLayout;

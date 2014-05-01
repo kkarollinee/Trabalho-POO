@@ -65,7 +65,7 @@ public class BD {
 	}
 	
 	//nota fiscal fornecedor juridico
-	public void gravaNotaFiscalFornecedorJur(NFEntradaJuridico nf,boolean editar){
+	public void gravaNotaFiscalFornecedorJur(NFEntrada nf,boolean editar){
 		//nota_id|data|fornecedorjuridico_id
 		String registro = nf.nota_id+"|"+nf.data+"|"+nf.fornecedor.pessoa_id;
 		if (editar){
@@ -86,45 +86,11 @@ public class BD {
 			this.gravaArquivo("NotaEntradaJuridicoProduto", registro);
 	}
 	
-	//nota fiscal fornecedor fisico
-	public void gravaNotaFiscalFornecedorFis(NFEntradaFisico nf,boolean editar){
-		//nota_id|data|fornecedorfisico_id
-		String registro = nf.nota_id+"|"+nf.data+"|"+nf.fornecedor.pessoa_id;
-		if (editar){
-			this.editaArquivo("NotaEntradaFisico", registro);
-		}
-		else
-			this.gravaArquivo("NotaEntradaFisico", registro);
-		
-		this.gravaNotaFiscalFornecedorFisProduto(nf.nota_id,nf.produtos,editar);
-	}
-	public void gravaNotaFiscalFornecedorFisProduto(int nota_id, Produto p, boolean editar){
-		//nota_id|produto_id|quantidade|precoUnitario
-		String registro = nota_id+"|"+p.produto_id+"|"+p.quantidadeNaNota+"|"+p.valor;
-		if (editar){
-			this.editaArquivo("NotaEntradaFisicoProduto", registro);
-		}
-		else
-			this.gravaArquivo("NotaEntradaFisicoProduto", registro);
-	}
-	
-	public void gravaFornecedorFis(FornecedorFisico f,boolean editar){
-		//pessoa_id|nome|rg|cpf|telefone|status|rua|numero|complemento|bairro|cidade|estado
-		String registro = f.pessoa_id+"|"+f.nome+"|"+f.rg+"|"+f.cpf+"|"+f.telefone+"|"+f.status+"|"+
-		f.endereco.rua+"|"+f.endereco.numero+"|"+f.endereco.complemento+"|"+f.endereco.bairro+"|"+
-		f.endereco.cidade+"|"+f.endereco.estado;
-		
-		if (editar){
-			this.editaArquivo("FornecedorFisico", registro);
-		}
-		else
-			this.gravaArquivo("FornecedorFisico", registro);
-	}
-	public void gravaFornecedorJur(FornecedorJuridico f,boolean editar){
+	public void gravaFornecedorJur(Fornecedor f,boolean editar){
 		//pessoa_id|razaoSocial|nomeFantasia|cnpj|telefone|status|rua|numero|complemento|bairro|cidade|estado
-		String registro = f.pessoa_id+"|"+f.razaoSocial+"|"+f.nomeFantasia+"|"+f.cnpj+"|"+f.telefone+"|"+f.status+"|"+
-		f.endereco.rua+"|"+f.endereco.numero+"|"+f.endereco.complemento+"|"+f.endereco.bairro+"|"+
-		f.endereco.cidade+"|"+f.endereco.estado;
+		String registro = f.pessoa_id+"|"+f.razaoSocialVal+"|"+f.nomeFantasiaVal+"|"+f.cnpjVal+"|"+f.telefoneVal+"|"+f.statusVal+"|"+
+		f.endereco.ruaVal+"|"+f.endereco.numeroVal+"|"+f.endereco.complementoVal+"|"+f.endereco.bairroVal+"|"+
+		f.endereco.cidadeVal+"|"+f.endereco.estadoVal;
 		
 		if (editar){
 			this.editaArquivo("FornecedorJuridico", registro);
@@ -135,8 +101,8 @@ public class BD {
 	public void gravaClienteFis(ClienteFisico f,boolean editar){
 		//pessoa_id|nome|rg|cpf|telefone|status|rua|numero|complemento|bairro|cidade|estado
 		String registro = f.pessoa_id+"|"+f.nome+"|"+f.rg+"|"+f.cpf+"|"+f.telefone+"|"+f.status+"|"+
-		f.endereco.rua+"|"+f.endereco.numero+"|"+f.endereco.complemento+"|"+f.endereco.bairro+"|"+
-		f.endereco.cidade+"|"+f.endereco.estado;
+		f.endereco.ruaVal+"|"+f.endereco.numeroVal+"|"+f.endereco.complementoVal+"|"+f.endereco.bairroVal+"|"+
+		f.endereco.cidadeVal+"|"+f.endereco.estadoVal;
 		
 		if (editar){
 			this.editaArquivo("ClienteFisico", registro);
@@ -146,9 +112,9 @@ public class BD {
 	}
 	public void gravaClienteJur(ClienteJuridico f,boolean editar){
 		//pessoa_id|razaoSocial|nomeFantasia|cnpj|telefone|status|rua|numero|complemento|bairro|cidade|estado
-		String registro = f.pessoa_id+"|"+f.razaoSocial+"|"+f.nomeFantasia+"|"+f.cnpj+"|"+f.telefone+"|"+f.status+"|"+
-		f.endereco.rua+"|"+f.endereco.numero+"|"+f.endereco.complemento+"|"+f.endereco.bairro+"|"+
-		f.endereco.cidade+"|"+f.endereco.estado;
+		String registro = f.pessoa_id+"|"+f.razaoSocialVal+"|"+f.nomeFantasiaVal+"|"+f.cnpjVal+"|"+f.telefoneVal+"|"+f.statusVal+"|"+
+		f.endereco.ruaVal+"|"+f.endereco.numeroVal+"|"+f.endereco.complementoVal+"|"+f.endereco.bairroVal+"|"+
+		f.endereco.cidadeVal+"|"+f.endereco.estadoVal;
 		
 		if (editar){
 			this.editaArquivo("ClienteJuridico", registro);
@@ -158,9 +124,9 @@ public class BD {
 	}
 	public void gravaEmpresa(MinhaEmpresa f,boolean editar){
 		//pessoa_id|razaoSocial|nomeFantasia|cnpj|telefone|status|rua|numero|complemento|bairro|cidade|estado|saldo
-		String registro = f.pessoa_id+"|"+f.razaoSocial+"|"+f.nomeFantasia+"|"+f.cnpj+"|"+f.telefone+"|"+f.status+"|"+
-		f.endereco.rua+"|"+f.endereco.numero+"|"+f.endereco.complemento+"|"+f.endereco.bairro+"|"+
-		f.endereco.cidade+"|"+f.endereco.estado+"|"+f.saldo;
+		String registro = f.pessoa_id+"|"+f.razaoSocialVal+"|"+f.nomeFantasiaVal+"|"+f.cnpjVal+"|"+f.telefoneVal+"|"+f.statusVal+"|"+
+		f.endereco.ruaVal+"|"+f.endereco.numeroVal+"|"+f.endereco.complementoVal+"|"+f.endereco.bairroVal+"|"+
+		f.endereco.cidadeVal+"|"+f.endereco.estadoVal+"|"+f.saldo;
 		
 		if (editar){
 			this.editaArquivo("MinhaEmpresa", registro);
@@ -172,8 +138,8 @@ public class BD {
 		//pessoa_id|nome|rg|cpf|telefone|status|rua|numero|complemento|bairro|cidade|estado|cargo|horarioEntrada|
 		//horarioPausa|horarioRetorno|horarioSaida|salario
 		String registro = f.pessoa_id+"|"+f.nome+"|"+f.rg+"|"+f.cpf+"|"+f.telefone+"|"+f.status+"|"+
-		f.endereco.rua+"|"+f.endereco.numero+"|"+f.endereco.complemento+"|"+f.endereco.bairro+"|"+
-		f.endereco.cidade+"|"+f.endereco.estado+"|"+f.cargo+"|"+f.horarioEntrada+"|"+
+		f.endereco.ruaVal+"|"+f.endereco.numeroVal+"|"+f.endereco.complementoVal+"|"+f.endereco.bairroVal+"|"+
+		f.endereco.cidadeVal+"|"+f.endereco.estadoVal+"|"+f.cargo+"|"+f.horarioEntrada+"|"+
 		f.horarioPausa+"|"+f.horarioRetorno+"|"+f.horarioSaida+"|"+f.salario;
 		
 		if (editar){
