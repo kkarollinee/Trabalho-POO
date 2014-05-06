@@ -1,4 +1,5 @@
 package sistema;
+import banco.BD;
 import java.util.Scanner;
 
 
