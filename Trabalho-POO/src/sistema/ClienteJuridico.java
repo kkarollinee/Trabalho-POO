@@ -1,5 +1,12 @@
 package sistema;
+import grafico.Desktop;
+
+import java.awt.GridLayout;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 public class ClienteJuridico extends PessoaJuridica{
 	public ClienteJuridico (int pessoa_id, String razao, String fantasia, long cnpj, long tel, boolean status, Endereco endereco){
 		this.pessoa_id=pessoa_id;
@@ -24,4 +31,50 @@ public class ClienteJuridico extends PessoaJuridica{
 	public ClienteJuridico(){
 		super();
 	}
+	
+	public static JPanel[] getPanels(){
+		JPanel backListPanel = new JPanel();
+		
+		JPanel frontListPanel = new JPanel();
+		
+		JPanel productList = new JPanel();
+		ArrayList<ArrayList<String>> ps = Desktop.banco.lerArquivo("ClienteJuridico");
+
+		productList.setLayout(new GridLayout((ps.size()+1),6,10,4));
+		productList.add(new JLabel("Razao Social"));
+		productList.add(new JLabel("Nome Fantasia"));
+		productList.add(new JLabel("CNPJ"));
+		productList.add(new JLabel("Telefone"));
+		productList.add(new JLabel("Rua"));
+		productList.add(new JLabel("Numero"));
+		productList.add(new JLabel("Complemento"));
+		productList.add(new JLabel("Bairro"));
+		productList.add(new JLabel("Cidade"));
+		productList.add(new JLabel("Estado"));
+		productList.add(new JLabel("Status"));
+		for(int x=0; x<ps.size(); x++){
+			for(int y=0;y<6;y++){
+				productList.add(new JLabel(ps.get(x).get(y)));
+			}
+		}
+		backListPanel.add(frontListPanel);
+		frontListPanel.add(productList);
+		
+		
+		JPanel castPanel = new JPanel();
+		
+		JPanel ClienteCadastro = new ClienteJuridico();
+		castPanel.add(ClienteCadastro);
+		JPanel [] p = { backListPanel, castPanel };
+		return p;
+		
+	}
+
+	public static JButton[] getButtons(){
+		JButton [] b = { new JButton("Listagem"), new JButton("Cadastro") };
+		return b;
+	}
+	
+	
+	
 }

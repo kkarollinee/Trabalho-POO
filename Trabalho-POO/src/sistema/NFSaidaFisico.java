@@ -1,7 +1,14 @@
 package sistema;
 import banco.BD;
+import grafico.Desktop;
+
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 public class NFSaidaFisico extends NotaFiscal{
@@ -50,11 +57,40 @@ public class NFSaidaFisico extends NotaFiscal{
 			return;
 		}
 		
-		this.cliente = new ClienteFisico(f);
-		this.produtos = new Produto(p);
-		System.out.print("\nQuantidade de produto: ");
-		this.produtos.quantidadeNaNota = Integer.parseInt(i.nextLine());
-		System.out.print("\nValor unitario: ");
-		this.produtos.valor = Integer.parseInt(i.nextLine());
+	
+	}
+	
+	public static JPanel[] getPanels(){
+		JPanel backListPanel = new JPanel();
+		
+		JPanel frontListPanel = new JPanel();
+		
+		JPanel productList = new JPanel();
+		ArrayList<ArrayList<String>> ps = Desktop.banco.lerArquivo("NotaSaidaFisico");
+
+		productList.setLayout(new GridLayout((ps.size()+1),6,10,4));
+		productList.add(new JLabel("Quantidade de produto"));
+		productList.add(new JLabel("Valor unitario"));
+		for(int x=0; x<ps.size(); x++){
+			for(int y=0;y<6;y++){
+				productList.add(new JLabel(ps.get(x).get(y)));
+			}
+		}
+		backListPanel.add(frontListPanel);
+		frontListPanel.add(productList);
+		
+		
+		JPanel castPanel = new JPanel();
+		
+		JPanel NFSaidaFisico = new NFSaidaFisico();
+		castPanel.add(NFSaidaFisico);
+		JPanel [] p = { backListPanel, castPanel };
+		return p;
+		
+	}
+
+	public static JButton[] getButtons(){
+		JButton [] b = { new JButton("Listagem"), new JButton("Cadastro") };
+		return b;
 	}
 }

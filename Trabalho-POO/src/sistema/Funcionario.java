@@ -1,10 +1,19 @@
 package sistema;
+import grafico.Desktop;
+
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 public class Funcionario extends PessoaFisica{
 	public String cargo;
 	public int horarioEntrada, horarioRetorno, horarioSaida, horarioPausa;
 	public double salario;
+	
 	public Funcionario(int id, String nome, String rg,long cpf, long tel, boolean status, Endereco endereco, String cargo, int hE, int hP, int hR, int hS,double salario){	
 		this.pessoa_id = id;
 		this.nome = nome;
@@ -38,24 +47,45 @@ public class Funcionario extends PessoaFisica{
 		this.horarioSaida = Integer.parseInt(f.get(16));
 		this.salario = Double.parseDouble(f.get(17));
 	}
+	
 	public Funcionario(){
-		super("Funcionario");
+		super();
+	}
+	
+	public static JPanel[] getPanels(){
+		JPanel backListPanel = new JPanel();
 		
-		Scanner dadosFuncionario = new Scanner(System.in);
+		JPanel frontListPanel = new JPanel();
 		
-		System.out.println("Este Formulario destina-se ao cadastro de um Funcionario\n" +
-				"Digite as informações solicitadas:");
-		System.out.print("\nCargo: ");
-		this.cargo = dadosFuncionario.nextLine();
-		System.out.print("\nHorario de Entrada: ");
-		this.horarioEntrada = dadosFuncionario.nextInt();
-		System.out.print("\nHorario de Pausa: ");
-		this.horarioPausa = dadosFuncionario.nextInt();
-		System.out.print("\nHorario de Retorno: ");
-		this.horarioRetorno = dadosFuncionario.nextInt();
-		System.out.print("\nHorario de Saida: ");
-		this.horarioSaida = dadosFuncionario.nextInt();
-		System.out.print("\nSalario: ");
-		this.salario = dadosFuncionario.nextDouble();
+		JPanel productList = new JPanel();
+		ArrayList<ArrayList<String>> ps = Desktop.banco.lerArquivo("Funcionario");
+		
+		productList.setLayout(new GridLayout((ps.size()+1),6,10,4));
+		productList.add(new JLabel("Razao Social"));
+		productList.add(new JLabel("Cargo"));
+		productList.add(new JLabel("Horario de Entrada"));
+		productList.add(new JLabel("Horario de Pausa"));
+		productList.add(new JLabel("Horario de Retorno"));
+		productList.add(new JLabel("Horario de Saida"));
+		productList.add(new JLabel("Salario"));
+	
+		for(int x=0; x<ps.size(); x++){
+			for(int y=0;y<6;y++){
+				productList.add(new JLabel(ps.get(x).get(y)));
+			}
+		}
+		backListPanel.add(frontListPanel);
+		frontListPanel.add(productList);
+		
+		JPanel castPanel = new JPanel();
+		
+		JPanel FuncionarioCadastro = new Funcionario();
+		castPanel.add(FuncionarioCadastro);
+		JPanel [] p = { backListPanel, castPanel };
+		return p;
+	}
+	public static JButton[] getButtons(){
+		JButton [] b = { new JButton("Listagem"), new JButton("Cadastro") };
+		return b;
 	}
 }
