@@ -58,40 +58,45 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 				break;
 			case "clientes":
 				if(window == null){
-					window = new WindowOfModule("Teste",null,null);
+					window = new WindowOfModule("Teste",ClienteFisico.getPanels(),ClienteFisico.getButtons());
+					window = new WindowOfModule("Teste",ClienteJuridico.getPanels(),ClienteJuridico.getButtons());
 			 		window.addWindowListener(this);
 				}
 				
-				window.setVisible(true);
-				break;
-			case "notas fiscais de entrada":
-				if(window == null){
-					window = new WindowOfModule("Teste",null,null);
-			 		window.addWindowListener(this);
-				}
 				
 				window.setVisible(true);
 				break;
-			case "notas fiscais de saida":
+			case "notaFiscalEntrada":
 				if(window == null){
-					window = new WindowOfModule("Teste",null,null);
+				window = new WindowOfModule("Teste",NFEntrada.getPanels(),NFEntrada.getButtons());
 			 		window.addWindowListener(this);
 				}
+				
+				
+				window.setVisible(true);
+				break;
+			case "notaFiscalSaida":
+				if(window == null){
+				window = new WindowOfModule("Teste",NFSaidaFisico.getPanels(),NFSaidaFisico.getButtons());
+			//	window = new WindowOfModule("Teste",NFSaidaJuridico.getPanels(),NFSaidaJuridico.getButtons());
+			 		window.addWindowListener(this);
+				}
+				
 				
 				window.setVisible(true);
 				break;
 					
-			case "minha empresa":
+			case "minhaEmpresa":
 				if(window == null){
-					window = new WindowOfModule("Teste",null,null);
+					window = new WindowOfModule("Teste",MinhaEmpresa.getPanels(),MinhaEmpresa.getButtons());
 			 		window.addWindowListener(this);
 				}
 				
 				window.setVisible(true);
 				break;
-			case "funcionario":
+			case "funcionarios":
 				if(window == null){
-					window = new WindowOfModule("Teste",null,null);
+					window = new WindowOfModule("Teste",Funcionario.getPanels(),Funcionario.getButtons());
 			 		window.addWindowListener(this);
 				}
 				
@@ -99,7 +104,7 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 				break;
 			case "relatorios":
 				if(window == null){
-					window = new WindowOfModule("Teste",null,null);
+					window = new WindowOfModule("Teste",Relatorios.getPanels(),Relatorios.getButtons());
 			 		window.addWindowListener(this);
 				}
 				
