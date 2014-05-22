@@ -148,15 +148,6 @@ public class BD {
 		else
 			this.gravaArquivo("Funcionario", registro);
 	}
-	public void gravaRelatorio(Relatorios r,boolean editar){
-		String registro = "|"+r+"|"+r+"|"+r;
-		
-		if (editar){
-			this.editaArquivo("Relatorios", registro);
-		}
-		else
-			this.gravaArquivo("Relatorios", registro);
-	}
 	public boolean gravaArquivo(String arquivo, String dado){
 		try{
 			FileWriter arq = new FileWriter(arquivo+".txt",true);

@@ -1,4 +1,4 @@
-package sistema;
+package modulos;
 
 import grafico.Desktop;
 
