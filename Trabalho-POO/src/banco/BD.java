@@ -1,15 +1,55 @@
 package banco;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException; //imports necessarios para mysql
+import java.sql.Statement;
+
 import java.io.*;
 import java.util.ArrayList;
 import sistema.*;
 
 public class BD {
+	String serverName ="localhost";
+	String mydatabase = "softy";
+	String url ="jdbc:mysql://"+ serverName + "/" + mydatabase;
+	String username= "softy";
+	String password ="123456";
+	
+	Connection connection = null;
+	
+	public static void main (String [] args){
+		BD teste = new BD();
+	}
+	
 	public BD(){
+		try{
+			String driverName= "com.mysql.jdbc.Driver";
+			Class.forName(driverName);
+			connection = DriverManager.getConnection(url,username,password);
+			
+			Statement state = connection.createStatement();
+			
+			ResultSet result = state.executeQuery("SELECT * FROM produto");
+			
+			while(result.next()){
+				System.out.println(result.getString("nome"));
+			}
+		}
+		catch (SQLException e){
+			System.out.println( "Nao foi possivel conectar ao Banco de Dados");
+		}
+		catch (ClassNotFoundException e){
+			System.out.println("O driver expecificado nao foi encontrado.");
+		}
 		
 	}
-	public void gravaProduto(Produto p,boolean editar){
+	public void gravaProduto(Produto p,boolean editar) throws SQLException{
 		//formato do registro:
 		// produto_id|nome|valor|peso|quatidadeEstocada|grupo
+		
+		Statement s = connection.createStatement();
+		s.executeQuery("INSERT INTO produto ......");
 		
 		String registro=p.produto_id+"|"+p.nome+"|"+p.valor+"|"+p.peso+"|"+p.quantidadeEstocada+"|"+p.grupo;
 		
