@@ -15,9 +15,9 @@ public class Produto {
 	public float valor, peso;
 	public int quantidadeEstocada;
 	public int quantidadeNaNota;
-	public String grupo;
+	public GrupoProduto grupo=null;
 	
-	public Produto(int produto_id,String nome, float valor, float peso, int quatidade,String grupo){
+	public Produto(int produto_id,String nome, float valor, float peso, int quatidade,GrupoProduto grupo){
 		this.produto_id=produto_id;
 		this.nome=nome;
 		this.valor=valor;
@@ -36,7 +36,7 @@ public class Produto {
 		this.peso=Float.parseFloat(M.get(3));
 		this.quantidadeNaNota=Integer.parseInt(M.get(4));
 		this.quantidadeEstocada=Integer.parseInt(M.get(4));
-		this.grupo=M.get(5);
+		
 	}
 	public Produto(){
 		
@@ -46,13 +46,13 @@ public class Produto {
 		this.quantidadeEstocada -= quantidade;
 		
 		BD b = new BD();
-		b.gravaProduto(this, true);
+		
 	}
 	public void adicionarEstoque(int quantidade){
 		this.quantidadeEstocada += quantidade;
 		
 		BD b = new BD();
-		b.gravaProduto(this, true);
+		
 	}
 	
 	public static JPanel[] getPanels(){

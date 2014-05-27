@@ -20,6 +20,16 @@ public class BD {
 	
 	public static void main (String [] args){
 		BD teste = new BD();
+		
+		Produto p = new Produto(3,"produtoeditado", 52, 52, 23, null);
+		
+		try {
+			ResultSet t = teste.gravaProduto(p,true);
+			t.next();
+			System.out.println(t.getInt(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public BD(){
@@ -28,36 +38,43 @@ public class BD {
 			Class.forName(driverName);
 			connection = DriverManager.getConnection(url,username,password);
 			
-			Statement state = connection.createStatement();
-			
-			ResultSet result = state.executeQuery("SELECT * FROM produto");
-			
-			while(result.next()){
-				System.out.println(result.getString("nome"));
-			}
+//			 Statement state = connection.createStatement();
+//			ResultSet result = state.executeQuery("SELECT * FROM produto");
+//			while(result.next()){
+//				System.out.println(result.getString("nome"));
+//			}
 		}
 		catch (SQLException e){
-			System.out.println( "Nao foi possivel conectar ao Banco de Dados");
+			System.out.println("Nao foi possivel conectar ao Banco de Dados");
 		}
 		catch (ClassNotFoundException e){
 			System.out.println("O driver expecificado nao foi encontrado.");
 		}
 		
 	}
-	public void gravaProduto(Produto p,boolean editar) throws SQLException{
-		//formato do registro:
-		// produto_id|nome|valor|peso|quatidadeEstocada|grupo
+	public ResultSet gravaProduto(Produto p,boolean editar) throws SQLException{
+		String controleGrupo = (String) ( p.grupo != null ?p.grupo.grupoID :"NULL");
 		
 		Statement s = connection.createStatement();
-		s.executeQuery("INSERT INTO produto ......");
-		
-		String registro=p.produto_id+"|"+p.nome+"|"+p.valor+"|"+p.peso+"|"+p.quantidadeEstocada+"|"+p.grupo;
 		
 		if (editar){
-			this.editaArquivo("Produto", registro);
+			s.executeUpdate(
+				"UPDATE tb_produto " +
+				"SET nome='"+p.nome+"', valor= '"+p.valor+"', peso= '"+p.peso+"', " +
+				"quantidadeEstocada= '"+p.quantidadeEstocada+"',codGrupoProduto="+controleGrupo+" " +
+				"WHERE codProduto ='"+p.produto_id+"' ",
+				Statement.RETURN_GENERATED_KEYS
+			);
 		}
-		else
-			this.gravaArquivo("Produto", registro);
+		else {
+			s.executeUpdate(
+				"INSERT INTO tb_produto " +
+				"(nome, valor, peso, quantidadeEstocada, codGrupoProduto) "+
+				"VALUES ('"+p.nome+"', '"+p.valor+"', '"+p.peso+"', '"+p.quantidadeEstocada+"', "+controleGrupo+")",
+				Statement.RETURN_GENERATED_KEYS
+			);
+		}
+		return s.getGeneratedKeys();
 	}
 	
 	//nota fiscal cliente fisico
