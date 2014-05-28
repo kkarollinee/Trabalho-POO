@@ -45,13 +45,9 @@ public class Produto {
 	public void abaterEstoque(int quantidade){
 		this.quantidadeEstocada -= quantidade;
 		
-		BD b = new BD();
-		
 	}
 	public void adicionarEstoque(int quantidade){
 		this.quantidadeEstocada += quantidade;
-		
-		BD b = new BD();
 		
 	}
 	
