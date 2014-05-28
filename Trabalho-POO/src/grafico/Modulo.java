@@ -44,7 +44,8 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 		switch(ImgUrl){
 			case "produtos":
 				if(window == null){
-					window = new WindowOfModule("Teste",Produto.getPanels(),Produto.getButtons());
+					Produtos modProd = new Produtos();
+					window = new WindowOfModule("Produtos",modProd.getPanels(),modProd.getButtons());
 			 		window.addWindowListener(this);
 				}
 				
