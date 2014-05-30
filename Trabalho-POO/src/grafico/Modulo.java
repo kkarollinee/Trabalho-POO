@@ -1,5 +1,6 @@
 package grafico;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
@@ -37,6 +38,7 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 		icone.setIcon(imgNormal);
 		add(this.icone);
 		
+		icone.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		icone.addMouseListener(this);
 	}
 	@Override

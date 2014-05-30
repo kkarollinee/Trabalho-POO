@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -44,6 +45,7 @@ import java.awt.event.ActionListener;
 			allPanels.add(scroller[x],"P"+x);
 		}
 		for(int x = 0; x < bPanels.length; x++){
+			bPanels[x].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			bPanels[x].addActionListener(new ButtonHandler(x));
 			gridButtonPanel.add(bPanels[x]);
 		}
