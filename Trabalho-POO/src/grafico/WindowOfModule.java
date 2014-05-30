@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,10 +18,10 @@ import java.awt.event.ActionListener;
 	 				allPanels; //contem todas as partes do modulo, cadastro, listagem, etc
 	 
 	 public  WindowOfModule(String title, JPanel [] panels, JButton [] bPanels){
-		 
 		setTitle(title);
 		setLocation(50,100);
-		setSize(800,600);
+		setSize(1000,600);
+		setMinimumSize(new Dimension(800,400));
 		
 		total = new JPanel();
 		total.setLayout(new BorderLayout());
@@ -31,13 +33,19 @@ import java.awt.event.ActionListener;
 		gridButtonPanel = new JPanel();
 		gridButtonPanel.setSize(100,1000);
 		gridButtonPanel.setLayout(new GridLayout(bPanels.length,1,10,10));
+		
 		gridButtonPanel.setBackground(new Color(210,210,255));
+		JScrollPane [] scroller = new JScrollPane[panels.length];
 		
 		for(int x = 0; x < panels.length; x++){
 			panels[x].setBackground(Color.WHITE);
-			allPanels.add(panels[x],"P"+x);
+			
+			scroller[x] = new JScrollPane(panels[x],JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			
+			allPanels.add(scroller[x],"P"+x);
 		}
 		for(int x = 0; x < bPanels.length; x++){
+			bPanels[x].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			bPanels[x].addActionListener(new ButtonHandler(x));
 			gridButtonPanel.add(bPanels[x]);
 		}
