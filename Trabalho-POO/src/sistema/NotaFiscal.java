@@ -14,6 +14,7 @@ public abstract class NotaFiscal extends JPanel {
 	public int nota_id;
 	public int data;
 	public Produto produtos;
+	public ArrayList <Produto> arrayProduto = new ArrayList <Produto>();
 	
 	public NotaFiscal(String nomeArquivo){
 		Scanner input = new Scanner(System.in);

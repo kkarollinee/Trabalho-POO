@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class NFSaidaJuridico extends NotaFiscal{
 	public ClienteJuridico cliente;
+	public Funcionario funcionario;
 	public NFSaidaJuridico(int nota_id, int data, ClienteJuridico cliente,Produto p){
 		this.nota_id = nota_id;
 		this.data = data;

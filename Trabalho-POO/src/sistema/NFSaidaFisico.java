@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 public class NFSaidaFisico extends NotaFiscal{
 	public ClienteFisico cliente;
+	public Funcionario funcionario;
 	
 	public NFSaidaFisico(int nota_id, int data, ClienteFisico cliente,Produto p){
 		this.nota_id = nota_id;
@@ -58,39 +59,5 @@ public class NFSaidaFisico extends NotaFiscal{
 		}
 		
 	
-	}
-	
-	public static JPanel[] getPanels(){
-		JPanel backListPanel = new JPanel();
-		
-		JPanel frontListPanel = new JPanel();
-		
-		JPanel productList = new JPanel();
-		ArrayList<ArrayList<String>> ps = Desktop.banco.lerArquivo("NotaSaidaFisico");
-
-		productList.setLayout(new GridLayout((ps.size()+1),6,10,4));
-		productList.add(new JLabel("Quantidade de produto"));
-		productList.add(new JLabel("Valor unitario"));
-		for(int x=0; x<ps.size(); x++){
-			for(int y=0;y<6;y++){
-				productList.add(new JLabel(ps.get(x).get(y)));
-			}
-		}
-		backListPanel.add(frontListPanel);
-		frontListPanel.add(productList);
-		
-		
-		JPanel castPanel = new JPanel();
-		
-		JPanel NFSaidaFisico = new NFSaidaFisico();
-		castPanel.add(NFSaidaFisico);
-		JPanel [] p = { backListPanel, castPanel };
-		return p;
-		
-	}
-
-	public static JButton[] getButtons(){
-		JButton [] b = { new JButton("Listagem"), new JButton("Cadastro") };
-		return b;
 	}
 }

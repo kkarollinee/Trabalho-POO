@@ -72,7 +72,7 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 				break;
 			case "notaFiscalEntrada":
 				if(window == null){
-				window = new WindowOfModule("Teste",NFEntrada.getPanels(),NFEntrada.getButtons());
+					window = new WindowOfModule("Teste",NFEntrada.getPanels(),NFEntrada.getButtons());
 			 		window.addWindowListener(this);
 				}
 				
@@ -81,8 +81,9 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 				break;
 			case "notaFiscalSaida":
 				if(window == null){
-				window = new WindowOfModule("Teste",NFSaidaFisico.getPanels(),NFSaidaFisico.getButtons());
-			//	window = new WindowOfModule("Teste",NFSaidaJuridico.getPanels(),NFSaidaJuridico.getButtons());
+					Saidas mod = new Saidas();
+					window = new WindowOfModule("Teste",mod.getPanels(),mod.getButtons());
+				//	window = new WindowOfModule("Teste",NFSaidaJuridico.getPanels(),NFSaidaJuridico.getButtons());
 			 		window.addWindowListener(this);
 				}
 				
