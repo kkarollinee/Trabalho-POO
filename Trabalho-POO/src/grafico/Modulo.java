@@ -1,5 +1,6 @@
 package grafico;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
@@ -37,6 +38,7 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 		icone.setIcon(imgNormal);
 		add(this.icone);
 		
+		icone.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		icone.addMouseListener(this);
 	}
 	@Override
@@ -70,7 +72,7 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 				break;
 			case "notaFiscalEntrada":
 				if(window == null){
-				window = new WindowOfModule("Teste",NFEntrada.getPanels(),NFEntrada.getButtons());
+					window = new WindowOfModule("Teste",NFEntrada.getPanels(),NFEntrada.getButtons());
 			 		window.addWindowListener(this);
 				}
 				
@@ -79,8 +81,9 @@ public class Modulo extends JPanel implements MouseListener, WindowListener{
 				break;
 			case "notaFiscalSaida":
 				if(window == null){
-				window = new WindowOfModule("Teste",NFSaidaFisico.getPanels(),NFSaidaFisico.getButtons());
-			//	window = new WindowOfModule("Teste",NFSaidaJuridico.getPanels(),NFSaidaJuridico.getButtons());
+					Saidas mod = new Saidas();
+					window = new WindowOfModule("Teste",mod.getPanels(),mod.getButtons());
+				//	window = new WindowOfModule("Teste",NFSaidaJuridico.getPanels(),NFSaidaJuridico.getButtons());
 			 		window.addWindowListener(this);
 				}
 				

@@ -1,4 +1,4 @@
-package sistema;
+ package sistema;
 import banco.BD;
 import grafico.Desktop;
 
@@ -49,37 +49,5 @@ public class Produto {
 	public void adicionarEstoque(int quantidade){
 		this.quantidadeEstocada += quantidade;
 		
-	}
-	
-	public static JPanel[] getPanels(){
-		JPanel backListPanel = new JPanel();
-		
-		JPanel frontListPanel = new JPanel();
-		
-		JPanel productList = new JPanel();
-		ArrayList<ArrayList<String>> ps = Desktop.banco.lerArquivo("Produto");
-
-		productList.setLayout(new GridLayout((ps.size()+1),6,10,4));
-		productList.add(new JLabel("Codigo"));
-		productList.add(new JLabel("Nome"));
-		productList.add(new JLabel("Valor"));
-		productList.add(new JLabel("Peso"));
-		productList.add(new JLabel("Quant. Estocada"));
-		productList.add(new JLabel("Grupo"));
-		for(int x=0; x<ps.size(); x++){
-			for(int y=0;y<6;y++){
-				productList.add(new JLabel(ps.get(x).get(y)));
-			}
-		}
-		backListPanel.add(frontListPanel);
-		frontListPanel.add(productList);
-		JPanel [] p = { backListPanel, new JPanel() };
-		return p;
-		
-	}
-
-	public static JButton[] getButtons(){
-		JButton [] b = { new JButton("Listagem"), new JButton("Cadastro") };
-		return b;
 	}
 }

@@ -52,17 +52,24 @@ public class BD {
 		}
 		
 	}
+	public ResultSet getProdutos() throws SQLException{
+		Statement s = connection.createStatement();
+		s.executeQuery(
+			"SELECT * FROM tb_produto"
+		);
+		return s.getResultSet();
+	}
 	public ResultSet gravaProduto(Produto p,boolean editar) throws SQLException{
-		String controleGrupo = (String) ( p.grupo != null ?p.grupo.grupoID :"NULL");
+		String controleGrupo = (p.grupo != null? "'"+p.grupo.grupoID+"'":"NULL");
 		
 		Statement s = connection.createStatement();
 		
 		if (editar){
 			s.executeUpdate(
 				"UPDATE tb_produto " +
-				"SET nome='"+p.nome+"', valor= '"+p.valor+"', peso= '"+p.peso+"', " +
-				"quantidadeEstocada= '"+p.quantidadeEstocada+"',codGrupoProduto="+controleGrupo+" " +
-				"WHERE codProduto ='"+p.produto_id+"' ",
+				"SET nome='"+p.nome+"', valor='"+p.valor+"', peso='"+p.peso+"', " +
+				"quantidadeEstocada= '"+p.quantidadeEstocada+"', codGrupoProduto="+controleGrupo+" " +
+				"WHERE codProduto='"+p.produto_id+"' ",
 				Statement.RETURN_GENERATED_KEYS
 			);
 		}
@@ -76,6 +83,45 @@ public class BD {
 		}
 		return s.getGeneratedKeys();
 	}
+	
+	public ResultSet gravaNotaSaida(NotaFiscal n, int tipoCliente) throws SQLException{
+		Statement s = connection.createStatement();
+		
+		if(tipoCliente==0){ //0-fis 1-jur
+			NFSaidaFisico nf = (NFSaidaFisico)n;
+			s.executeUpdate(
+				"INSERT INTO tb_nfsaida " +
+				"(tipoCliente, data, valorNota, codFuncionario, codClienteFisico, codClienteJuridico) "+
+				"VALUES ("+tipoCliente+", '"+nf.data+"', '"+nf.funcionario.pessoa_id+"', '"+nf.cliente.pessoa_id+"', NULL)",
+				Statement.RETURN_GENERATED_KEYS
+			);
+			
+		}
+		else{
+			NFSaidaJuridico nf = (NFSaidaJuridico)n;
+			s.executeUpdate(
+				"INSERT INTO tb_nfsaida " +
+				"(tipoCliente, data, valorNota, codFuncionario, codClienteFisico, codClienteJuridico) "+
+				"VALUES ("+tipoCliente+", '"+nf.data+"', '"+nf.funcionario.pessoa_id+"', NULL, '"+nf.cliente.pessoa_id+"')",
+				Statement.RETURN_GENERATED_KEYS
+			);
+		}
+		ResultSet t = s.getGeneratedKeys();
+		t.next();
+		int codNota=t.getInt(1);
+		String query ="INSERT INTO tb_nfsaidaproduto (codNotaSaida, codProduto, quantidadeProduto, valorProduto) VALUES ";
+		
+		for(int x=0; x < n.arrayProduto.size(); x++){
+			query += "("+codNota+", "+n.arrayProduto.get(x).produto_id+", "+n.arrayProduto.get(x).quantidadeNaNota+", "+n.arrayProduto.get(x).valor+")";
+			if(x < n.arrayProduto.size()-1){
+				query += ",";
+			}
+		}
+		s.executeUpdate(query);
+		
+		return s.getGeneratedKeys();
+	}
+	
 	
 	//nota fiscal cliente fisico
 	public void gravaNotaFiscalClienteFis(NFSaidaFisico nf, boolean editar){
